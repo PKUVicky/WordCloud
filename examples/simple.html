@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../lib/d3/d3.js"></script>
+<script src="../d3.layout.cloud.js"></script>
+<script>
+  var fill = d3.scale.category20();
+  var word2count = [{word:"Hello", url:"simple.html", score:10}, {word: "World", url:"simple.html", score:20}, 
+				  {word:"Apple", url:"simple.html", score:5}, {word:"Google", url:"simple.html", score:3},
+				  {word:"Yahoo", url:"simple.html", score:2}, {word:"Facebook", url:"simple.html", score:12},
+				  {word:"Word", url:"simple.html", score:15}, {word:"Cloud", url:"simple.html", score:7}, 
+				  {word:"C", url:"simple.html", score:9}, {word:"JavaScript", url:"simple.html", score:8}, 
+				  {word:"Java", url:"simple.html",score:15}, {word:"C++", url:"simple.html", score:10}, 
+				  {word:"Python", url:"simple.html", score:6}, {word:"C#", url:"simple.html", score:8}, 
+				  {word:"Perl", url:"simple.html", score:15}, {word:"VB", url:"simple.html", score:9}, 
+
+				  {word:"shingle", url:"simple.html", score:4}, 
+				  {word:"shutter", url:"simple.html", score:8}, 
+				  {word:"oxen", url:"simple.html", score:8}, 
+				  {word:"proceeds", url:"simple.html", score:3}, 
+				  {word:"cacti", url:"simple.html", score:4}, 
+				  {word:"phenomena", url:"simple.html", score:5}, 
+				  {word:"apportion", url:"simple.html", score:4}, 
+				  {word:"board", url:"simple.html", score:7}, 
+				  {word:"benign", url:"simple.html", score:2}, 
+				  {word:"beverage", url:"simple.html", score:10}, 
+				  {word:"flock", url:"simple.html", score:7}, 
+				  {word:"immigrant", url:"simple.html", score:1}, 
+				  {word:"graduate", url:"simple.html", score:0}, 
+				  {word:"offspring", url:"simple.html", score:9}, 
+				  {word:"inferior", url:"simple.html", score:3}, 
+				  {word:"fault", url:"simple.html", score:3}, 
+				  {word:"positive", url:"simple.html", score:3}, 
+				  {word:"immune", url:"simple.html", score:3}, 
+				  {word:"contrast", url:"simple.html", score:4}, 
+				  {word:"gallant", url:"simple.html", score:4}, 
+				  {word:"audition", url:"simple.html", score:7}, 
+				  {word:"plight", url:"simple.html", score:2}, 
+				  {word:"validate", url:"simple.html", score:8}, 
+				  {word:"fantastic", url:"simple.html", score:3}, 
+				  {word:"keen", url:"simple.html", score:9}, 
+				  {word:"avocation", url:"simple.html", score:8}, 
+				  {word:"sanitation", url:"simple.html", score:3}, 
+				  {word:"denounce", url:"simple.html", score:4}, 
+				  {word:"publicize", url:"simple.html", score:1}, 
+				  {word:"steak", url:"simple.html", score:6}, 
+				  {word:"plumbing", url:"simple.html", score:2}, 
+				  {word:"vivid", url:"simple.html", score:8}, 
+				  {word:"husk", url:"simple.html", score:5}, 
+				  {word:"outlet", url:"simple.html", score:7}, 
+				  {word:"organic", url:"simple.html", score:5}, 
+				  {word:"stroke", url:"simple.html", score:5}, 
+				  {word:"terminus", url:"simple.html", score:9}, 
+				  {word:"flabby", url:"simple.html", score:3}, 
+				  {word:"furnishing", url:"simple.html", score:1}, 
+				  {word:"exorbitant", url:"simple.html", score:8}, 
+				  {word:"awkwardly", url:"simple.html", score:1}, 
+				  {word:"ascend", url:"simple.html", score:2}, 
+				  {word:"chafe", url:"simple.html", score:8}, 
+				  {word:"dispatch", url:"simple.html", score:3}, 
+				  {word:"repertoire", url:"simple.html", score:6}, 
+				  {word:"string", url:"simple.html", score:2}, 
+				  {word:"regeneration", url:"simple.html", score:5}, 
+				  {word:"distasteful", url:"simple.html", score:9}, 
+				  {word:"distasteful", url:"simple.html", score:9}, 
+				  {word:"curious", url:"simple.html", score:1}, 
+				  {word:"import", url:"simple.html", score:8}, 
+				  {word:"dime", url:"simple.html", score:2}, 
+				  {word:"ajar", url:"simple.html", score:5}, 
+				  {word:"hinge", url:"simple.html", score:3}, 
+				  {word:"maneuver", url:"simple.html", score:6}, 
+				  {word:"mock", url:"simple.html", score:7}, 
+				  {word:"pronghorn", url:"simple.html", score:1}, 
+				  {word:"pole", url:"simple.html", score:1}, 
+				  {word:"horn", url:"simple.html", score:9}, 
+				  {word:"perspective", url:"simple.html", score:6}, 
+				  {word:"temperate", url:"simple.html", score:3}, 
+				  {word:"supreme", url:"simple.html", score:10}, 
+				  {word:"entrenched", url:"simple.html", score:8}, 
+				  {word:"sturdy", url:"simple.html", score:5}, 
+				  {word:"survive", url:"simple.html", score:9}, 
+				  {word:"lodge", url:"simple.html", score:9}, 
+				  {word:"undergraduate", url:"simple.html", score:5}, 
+				  {word:"venom", url:"simple.html", score:4}, 
+				  {word:"penetrating", url:"simple.html", score:1}, 
+				  {word:"graze", url:"simple.html", score:6}, 
+				  {word:"stanza", url:"simple.html", score:1}, 
+				  {word:"alliteration", url:"simple.html", score:0}, 
+				  {word:"continuity", url:"simple.html", score:3}, 
+				  {word:"rationing", url:"simple.html", score:8}, 
+				  {word:"transform", url:"simple.html", score:8}, 
+				  {word:"submerge", url:"simple.html", score:6}, 
+				  {word:"ripen", url:"simple.html", score:3}, 
+				  {word:"bounce", url:"simple.html", score:5}, 
+				  {word:"merge", url:"simple.html", score:4}, 
+				  {word:"slide", url:"simple.html", score:5}, 
+				  {word:"mingle", url:"simple.html", score:0}, 
+				  {word:"diminish", url:"simple.html", score:3}, 
+				  {word:"bloom", url:"simple.html", score:0}, 
+				  {word:"shrivel", url:"simple.html", score:0}, 
+				  {word:"wither", url:"simple.html", score:7}, 
+				  {word:"drain", url:"simple.html", score:6}, 
+				  {word:"adapt", url:"simple.html", score:3}, 
+				  {word:"relax", url:"simple.html", score:6}, 
+				  {word:"halt", url:"simple.html", score:8}, 
+				  {word:"harmonize", url:"simple.html", score:3}, 
+				  {word:"circulate", url:"simple.html", score:5}, 
+				  {word:"evaporate", url:"simple.html", score:7}, 
+				  {word:"evaporate", url:"simple.html", score:9}, 
+				  {word:"swell", url:"simple.html", score:6}, 
+				  {word:"addictive", url:"simple.html", score:7}, 
+				  {word:"knapsack", url:"simple.html", score:7}, 
+				  {word:"sophisticated", url:"simple.html", score:3}, 
+				  {word:"appreciable", url:"simple.html", score:8}, 
+				  {word:"juice", url:"simple.html", score:2}, 
+				  {word:"haunt", url:"simple.html", score:1}, 
+				  {word:"slab", url:"simple.html", score:2}, 
+				  {word:"theme", url:"simple.html", score:3}, 
+				  {word:"calm", url:"simple.html", score:9}, 
+				  {word:"conservationist", url:"simple.html", score:7}, 
+				  {word:"afflict", url:"simple.html", score:3}, 
+				  {word:"critique", url:"simple.html", score:5}, 
+				  {word:"aspect", url:"simple.html", score:7}, 
+				  {word:"aspect", url:"simple.html", score:4}, 
+				  {word:"assault", url:"simple.html", score:8}, 
+				  {word:"quantum theory", url:"simple.html", score:3}, 
+				  {word:"slippery", url:"simple.html", score:3}, 
+				  {word:"conditioning", url:"simple.html", score:7}, 
+				  {word:"redirect", url:"simple.html", score:0}, 
+				  {word:"refinement", url:"simple.html", score:8}, 
+				  {word:"lengthy", url:"simple.html", score:7}, 
+				  {word:"current", url:"simple.html", score:10}, 
+				  {word:"couple", url:"simple.html", score:4}, 
+				  {word:"coil", url:"simple.html", score:2}, 
+				  {word:"rubble", url:"simple.html", score:6}, 
+				  {word:"hem", url:"simple.html", score:6}, 
+				  {word:"illustrate", url:"simple.html", score:0}, 
+				  {word:"perishable", url:"simple.html", score:5}, 
+				  {word:"matching", url:"simple.html", score:7}, 
+				  {word:"sanitary", url:"simple.html", score:3}, 
+				  {word:"barb", url:"simple.html", score:4}, 
+				  {word:"cadence", url:"simple.html", score:8}, 
+				  {word:"syllable", url:"simple.html", score:9}, 
+				  {word:"campaign", url:"simple.html", score:6}, 
+				  {word:"thorn", url:"simple.html", score:10}, 
+				  {word:"stem", url:"simple.html", score:6}, 
+				  {word:"legible", url:"simple.html", score:5}, 
+				  {word:"immigrant", url:"simple.html", score:8}, 
+				  {word:"mythology", url:"simple.html", score:3}, 
+				  {word:"graphics", url:"simple.html", score:2}, 
+				  {word:"motif", url:"simple.html", score:8}, 
+				  {word:"synthesizer", url:"simple.html", score:2}, 
+				  {word:"porcupine", url:"simple.html", score:5}, 
+				  {word:"butterfly", url:"simple.html", score:2}, 
+				  {word:"oyster", url:"simple.html", score:1}, 
+				  {word:"verdict", url:"simple.html", score:3}, 
+				  {word:"fogged", url:"simple.html", score:1}, 
+				  {word:"tissue", url:"simple.html", score:5}, 
+				  {word:"variable", url:"simple.html", score:7}, 
+				  {word:"virus", url:"simple.html", score:5}, 
+				  {word:"tragedy", url:"simple.html", score:9}, 
+				  {word:"thorn", url:"simple.html", score:3}, 
+				  {word:"yardstick", url:"simple.html", score:5}, 
+				  {word:"asset", url:"simple.html", score:4}, 
+				  {word:"contour", url:"simple.html", score:7}, 
+				  {word:"amenity", url:"simple.html", score:6}, 
+				  {word:"stimuli", url:"simple.html", score:0}, 
+				  {word:"starve", url:"simple.html", score:8}, 
+				  {word:"bush", url:"simple.html", score:7}, 
+				  {word:"patriotic", url:"simple.html", score:7}, 
+				  {word:"patriot", url:"simple.html", score:1}, 
+				  {word:"fanciful", url:"simple.html", score:1}, 
+				  {word:"well-being", url:"simple.html", score:3}, 
+				  {word:"security", url:"simple.html", score:5}, 
+				  {word:"securely", url:"simple.html", score:8}, 
+				  {word:"install", url:"simple.html", score:7}, 
+				  {word:"quail", url:"simple.html", score:1}, 
+				  {word:"saddle", url:"simple.html", score:5}, 
+
+				  {word:"Php", url:"simple.html", score:15}, {word:"R", url:"simple.html", score:7}];
+
+  d3.layout.cloud().size([1000, 600])
+      .words(word2count.map(function(d) {
+        return {url: d.url, text: d.word, size: 10 +  d.score * 5};
+      }))
+      .spiral("archimedean")
+      .padding(1)
+      .rotate(function() { return ~~(Math.random() * 120) - 60; })
+      .font("Impact")
+      .fontSize(function(d) { return d.size; })
+      .on("end", draw)
+      .start();
+
+  function draw(words) {
+    d3.select("body").append("svg")
+        .attr("width", 1050)
+        .attr("height", 650)
+      .append("g")
+        .attr("transform", "translate(500,300)")
+      .selectAll("text")
+        .data(words)
+      .enter().append("text")
+        .style("font-size", function(d) { return d.size + "px"; })
+        .style("font-family", "Impact")
+        .style("fill", function(d, i) { return fill(i); })
+        .attr("text-anchor", "middle")
+        .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+        })
+        .text(function(d) { return d.text; })
+	.on("click", function (d){
+          window.open(d.url, "_blank");
+        })
+	;
+  }
+</script>
